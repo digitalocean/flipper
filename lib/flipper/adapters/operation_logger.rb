@@ -69,9 +69,9 @@ module Flipper
       end
 
       # Public
-      def get(feature)
+      def get(feature, options = {})
         @operations << Operation.new(:get, [feature])
-        @adapter.get(feature)
+        @adapter.get(feature, options)
       end
 
       # Public

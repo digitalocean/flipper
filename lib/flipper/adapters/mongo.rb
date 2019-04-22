@@ -45,7 +45,7 @@ module Flipper
       # Public: Gets the values for all gates for a given feature.
       #
       # Returns a Hash of Flipper::Gate#key => value.
-      def get(feature)
+      def get(feature, options = {})
         doc = find(feature.key)
         result_for_feature(feature, doc)
       end

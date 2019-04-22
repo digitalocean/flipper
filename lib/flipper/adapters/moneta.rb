@@ -44,7 +44,7 @@ module Flipper
       # Public: Gets the values for all gates for a given feature.
       #
       # Returns a Hash of Flipper::Gate#key => value.
-      def get(feature)
+      def get(feature, options = {})
         default_config.merge(moneta[key(feature.key)].to_h)
       end
 

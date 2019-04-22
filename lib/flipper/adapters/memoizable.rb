@@ -66,9 +66,9 @@ module Flipper
       end
 
       # Public
-      def get(feature)
+      def get(feature, options = {})
         if memoizing?
-          cache.fetch(key_for(feature.key)) { cache[key_for(feature.key)] = @adapter.get(feature) }
+          cache.fetch(key_for(feature.key)) { cache[key_for(feature.key)] = @adapter.get(feature, options) }
         else
           @adapter.get(feature)
         end

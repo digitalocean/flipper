@@ -82,7 +82,7 @@ module Flipper
       end
 
       # Public
-      def get(feature)
+      def get(feature, options = {})
         payload = {
           operation: :get,
           adapter_name: @adapter.name,
@@ -90,7 +90,7 @@ module Flipper
         }
 
         @instrumenter.instrument(InstrumentationName, payload) do |payload|
-          payload[:result] = @adapter.get(feature)
+          payload[:result] = @adapter.get(feature, options)
         end
       end
 

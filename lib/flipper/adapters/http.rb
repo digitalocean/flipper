@@ -23,8 +23,10 @@ module Flipper
         @name = :http
       end
 
-      def get(feature)
-        response = @client.get("/features/#{feature.key}")
+      def get(feature, options = {})
+        page = options[:page] || 1
+        per_page = options[:per_page] || 20
+        response = @client.get("/features/#{feature.key}?page=#{page}&per_page=#{per_page}")
         if response.is_a?(Net::HTTPOK)
           parsed_response = JSON.parse(response.body)
           result_for_feature(feature, parsed_response.fetch('gates'))
@@ -141,7 +143,10 @@ module Flipper
 
         feature.gates.each do |gate|
           api_gate = api_gates.detect { |ag| ag['key'] == gate.key.to_s }
-          result[gate.key] = value_for_gate(gate, api_gate) if api_gate
+          if api_gate
+            result[gate.key] = value_for_gate(gate, api_gate)
+            result[:actors_count] = api_gate['actors_count'] if api_gate['actors_count']
+          end
         end
 
         result

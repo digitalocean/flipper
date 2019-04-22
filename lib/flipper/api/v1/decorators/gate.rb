@@ -15,11 +15,17 @@ module Flipper
           end
 
           def as_json
-            {
+            record = {
               'key' => gate.key.to_s,
               'name' => gate.name.to_s,
               'value' => value_as_json,
             }
+
+            if record['key'] == 'actors'
+              record['actors_count'] = (record['value'] && record['value'].size) || 0
+            end
+
+            record
           end
 
           private

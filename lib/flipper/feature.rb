@@ -232,8 +232,8 @@ module Flipper
     end
 
     # Public: Returns the raw gate values stored by the adapter.
-    def gate_values
-      GateValues.new(adapter.get(self))
+    def gate_values(options = {})
+      GateValues.new(adapter.get(self, options))
     end
 
     # Public: Get groups enabled for this feature.
@@ -242,6 +242,7 @@ module Flipper
     def enabled_groups
       groups_value.map { |name| Flipper.group(name) }.to_set
     end
+
     alias_method :groups, :enabled_groups
 
     # Public: Get groups not enabled for this feature.
@@ -261,8 +262,15 @@ module Flipper
     # Public: Get the adapter value for the actors gate.
     #
     # Returns Set of String flipper_id's.
-    def actors_value
-      gate_values.actors
+    def actors_value(options = {})
+      gate_values(options).actors
+    end
+
+    # Public: Get the adapter value for the actors count gate.
+    #
+    # Returns Integer of the actors count.
+    def actors_count(options = {})
+      gate_values(options).actors_count
     end
 
     # Public: Get the adapter value for the boolean gate.

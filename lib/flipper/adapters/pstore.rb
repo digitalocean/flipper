@@ -61,7 +61,7 @@ module Flipper
       end
 
       # Public
-      def get(feature)
+      def get(feature, options = {})
         @store.transaction do
           result_for_feature(feature)
         end

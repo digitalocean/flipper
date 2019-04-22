@@ -46,7 +46,7 @@ module Flipper
       end
 
       # Public
-      def get(feature)
+      def get(feature, options = {})
         read_feature(feature)
       end
 

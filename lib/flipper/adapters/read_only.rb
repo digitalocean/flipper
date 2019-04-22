@@ -25,8 +25,8 @@ module Flipper
         @adapter.features
       end
 
-      def get(feature)
-        @adapter.get(feature)
+      def get(feature, options = {})
+        @adapter.get(feature, options)
       end
 
       def get_multi(features)

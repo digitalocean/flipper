@@ -80,7 +80,7 @@ module Flipper
       # Public: Gets the values for all gates for a given feature.
       #
       # Returns a Hash of Flipper::Gate#key => value.
-      def get(feature)
+      def get(feature, options = {})
         db_gates = @gate_class.where(feature_key: feature.key.to_s).all
 
         result_for_feature(feature, db_gates)
@@ -164,7 +164,7 @@ module Flipper
           end
         when :set
           @gate_class.where(gate_attrs(feature, gate, thing))
-                     .delete
+            .delete
         else
           unsupported_data_type gate.data_type
         end

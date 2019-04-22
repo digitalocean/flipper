@@ -42,9 +42,9 @@ module Flipper
         @local.features
       end
 
-      def get(feature)
+      def get(feature, options = {})
         sync
-        @local.get(feature)
+        @local.get(feature, options)
       end
 
       def get_multi(features)

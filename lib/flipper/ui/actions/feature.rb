@@ -7,12 +7,30 @@ module Flipper
       class Feature < UI::Action
         include FeatureNameFromRoute
 
+        PER_PAGE = 10
+
         route %r{\A/features/(?<feature_name>.*)\Z}
 
         def get
           @feature = Decorators::Feature.new(flipper[feature_name])
           @page_title = "#{@feature.key} // Features"
           @percentages = [0, 1, 5, 10, 15, 25, 50, 75, 100]
+
+          @page = (@request.params["page"] || 1).to_i
+          @per_page = PER_PAGE
+          @actors_count = @feature.actors_count(page: @page, per_page: @per_page)
+
+          @pages = []
+
+          if @page > 1
+            @pages << %Q|<a href="#{script_name}/features/#{@feature.key}?page=#{@page - 1}">Previous</a>|
+          end
+
+          if (@page * PER_PAGE) < @actors_count
+            @pages << %Q|<a href="#{script_name}/features/#{@feature.key}?page=#{@page + 1}">Next</a>|
+          end
+
+          @pages << "#{@actors_count} actors are enabled."
 
           breadcrumb 'Home', '/'
           breadcrumb 'Features', '/features'

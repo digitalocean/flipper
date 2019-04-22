@@ -27,7 +27,7 @@ module Flipper
       # Public: Gets the values for all gates for a given feature.
       #
       # Returns a Hash of Flipper::Gate#key => value.
-      def get(feature)
+      def get(feature, options = {})
         rollout_feature = @rollout.get(feature.key)
         return default_config if rollout_feature.nil?
 

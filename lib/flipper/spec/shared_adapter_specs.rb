@@ -6,9 +6,9 @@ RSpec.shared_examples_for 'a flipper adapter' do
   let(:feature) { flipper[:stats] }
 
   let(:boolean_gate) { feature.gate(:boolean) }
-  let(:group_gate)   { feature.gate(:group) }
-  let(:actor_gate)   { feature.gate(:actor) }
-  let(:actors_gate)  { feature.gate(:percentage_of_actors) }
+  let(:group_gate) { feature.gate(:group) }
+  let(:actor_gate) { feature.gate(:actor) }
+  let(:actors_gate) { feature.gate(:percentage_of_actors) }
   let(:time_gate) { feature.gate(:percentage_of_time) }
 
   before do
@@ -23,6 +23,12 @@ RSpec.shared_examples_for 'a flipper adapter' do
 
   after do
     Flipper.unregister_groups
+  end
+
+  it 'contains a value for the actors_count value' do
+    actor22 = Flipper::Actor.new('22')
+    expect(subject.enable(feature, actor_gate, flipper.actor(actor22))).to eq(true)
+    expect(subject.get(feature)['actors_count']).to eq(1)
   end
 
   it 'has name that is a symbol' do

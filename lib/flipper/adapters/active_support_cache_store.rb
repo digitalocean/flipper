@@ -61,7 +61,7 @@ module Flipper
       end
 
       ## Public
-      def get(feature)
+      def get(feature, options = {})
         @cache.fetch(key_for(feature.key), @write_options) do
           @adapter.get(feature)
         end

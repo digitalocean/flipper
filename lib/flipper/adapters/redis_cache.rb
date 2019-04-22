@@ -60,7 +60,7 @@ module Flipper
       end
 
       # Public
-      def get(feature)
+      def get(feature, options = {})
         fetch(key_for(feature.key)) do
           @adapter.get(feature)
         end

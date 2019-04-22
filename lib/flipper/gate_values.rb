@@ -8,6 +8,7 @@ module Flipper
     LegitIvars = {
       'boolean' => '@boolean',
       'actors' => '@actors',
+      'actors_count' => '@actors_count',
       'groups' => '@groups',
       'percentage_of_time' => '@percentage_of_time',
       'percentage_of_actors' => '@percentage_of_actors',
@@ -15,11 +16,13 @@ module Flipper
 
     attr_reader :boolean
     attr_reader :actors
+    attr_reader :actors_count
     attr_reader :groups
     attr_reader :percentage_of_actors
     attr_reader :percentage_of_time
 
     def initialize(adapter_values)
+      @actors_count = Typecast.to_integer(adapter_values[:actors_count])
       @boolean = Typecast.to_boolean(adapter_values[:boolean])
       @actors = Typecast.to_set(adapter_values[:actors])
       @groups = Typecast.to_set(adapter_values[:groups])
@@ -39,8 +42,10 @@ module Flipper
         actors == other.actors &&
         groups == other.groups &&
         percentage_of_actors == other.percentage_of_actors &&
-        percentage_of_time == other.percentage_of_time
+        percentage_of_time == other.percentage_of_time &&
+        actors_count == other.actors_count
     end
+
     alias_method :==, :eql?
   end
 end
