@@ -34,6 +34,7 @@ module Flipper
         boolean = nil
         groups = Set.new(rollout_feature.groups)
         actors = Set.new(rollout_feature.users)
+        allowed_sans = Set.new(rollout_feature.allowed_sans)
 
         percentage_of_actors = case rollout_feature.percentage
                                when 100
@@ -53,6 +54,7 @@ module Flipper
           actors: actors,
           percentage_of_actors: percentage_of_actors,
           percentage_of_time: nil,
+          allowed_sans: allowed_sans,
         }
       end
 

@@ -140,6 +140,7 @@ module Flipper
 end
 
 require 'flipper/actor'
+require 'flipper/allowed_san'
 require 'flipper/adapter'
 require 'flipper/adapters/memoizable'
 require 'flipper/adapters/memory'
@@ -161,4 +162,5 @@ require 'flipper/types/group'
 require 'flipper/types/percentage'
 require 'flipper/types/percentage_of_actors'
 require 'flipper/types/percentage_of_time'
+require 'flipper/types/allowed_san'
 require 'flipper/typecast'

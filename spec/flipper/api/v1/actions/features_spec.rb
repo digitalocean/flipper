@@ -29,6 +29,7 @@ RSpec.describe Flipper::Api::V1::Actions::Features do
                   'key' => 'actors',
                   'name' => 'actor',
                   'value' => ['10'],
+                  'actors_count' => 1,
                 },
                 {
                   'key' => 'percentage_of_actors',
@@ -44,6 +45,11 @@ RSpec.describe Flipper::Api::V1::Actions::Features do
                   'key' => 'groups',
                   'name' => 'group',
                   'value' => [],
+                },
+                {
+                    "key"=>"allowed_sans",
+                    "name"=>"allowed_san",
+                    "value"=>[],
                 },
               ],
             },
@@ -124,6 +130,7 @@ RSpec.describe Flipper::Api::V1::Actions::Features do
               'key' => 'actors',
               'name' => 'actor',
               'value' => [],
+              "actors_count"=>0,
             },
             {
               'key' => 'percentage_of_actors',
@@ -139,6 +146,11 @@ RSpec.describe Flipper::Api::V1::Actions::Features do
               'key' => 'groups',
               'name' => 'group',
               'value' => [],
+            },
+            {
+                "key"=>"allowed_sans",
+                "name"=>"allowed_san",
+                "value"=>[],
             },
           ],
         }

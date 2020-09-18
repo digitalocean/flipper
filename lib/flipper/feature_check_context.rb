@@ -26,6 +26,10 @@ module Flipper
       values.actors
     end
 
+    def allowed_sans_value
+      values.allowed_sans
+    end
+
     # Public: Convenience method for boolean value value like Feature has.
     def boolean_value
       values.boolean

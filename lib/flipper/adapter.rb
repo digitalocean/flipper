@@ -18,6 +18,7 @@ module Flipper
           actors: Set.new,
           percentage_of_actors: nil,
           percentage_of_time: nil,
+          allowed_sans: Set.new,
         }
       end
     end

@@ -160,6 +160,14 @@ module Flipper
       enable Types::PercentageOfActors.wrap(percentage)
     end
 
+    def enable_san(san)
+      enable Types::AllowedSan.wrap(san)
+    end
+
+    def disable_san(san)
+      disable Types::AllowedSan.wrap(san)
+    end
+
     # Public: Disables a feature for an actor.
     #
     # actor - a Flipper::Types::Actor instance or an object that responds
@@ -266,6 +274,10 @@ module Flipper
       gate_values(options).actors
     end
 
+    def allowed_sans_value(options = {})
+      gate_values(options).allowed_sans
+    end
+
     # Public: Get the adapter value for the actors count gate.
     #
     # Returns Integer of the actors count.
@@ -354,6 +366,7 @@ module Flipper
         Gates::PercentageOfActors.new,
         Gates::PercentageOfTime.new,
         Gates::Group.new,
+        Gates::AllowedSan.new,
       ]
     end
 
