@@ -45,6 +45,11 @@ RSpec.describe Flipper::FeatureCheckContext do
     expect(described_class.new(args).actors_value).to eq(Set['User:1'])
   end
 
+  it 'knows allowed_sans_value' do
+    args = options.merge(values: Flipper::GateValues.new(allowed_sans: Set['*.edge.staff.digitalocean.com']))
+    expect(described_class.new(args).allowed_sans_value).to eq(Set['*.edge.staff.digitalocean.com'])
+  end
+
   it 'knows groups_value' do
     args = options.merge(values: Flipper::GateValues.new(groups: Set['admins']))
     expect(described_class.new(args).groups_value).to eq(Set['admins'])

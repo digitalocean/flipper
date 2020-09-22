@@ -64,7 +64,7 @@ RSpec.describe Flipper::Feature do
       instance.gates.each do |gate|
         expect(gate).to be_a(Flipper::Gate)
       end
-      expect(instance.gates.size).to be(5)
+      expect(instance.gates.size).to be(6)
     end
   end
 
@@ -191,6 +191,8 @@ RSpec.describe Flipper::Feature do
 
     user = Flipper::Actor.new('1')
     actor = Flipper::Types::Actor.new(user)
+    domain = Flipper::AllowedSan.new("*.edge.staff.digitalocean.com")
+    san = Flipper::Types::AllowedSan.new(domain)
     boolean_true = Flipper::Types::Boolean.new(true)
     boolean_false = Flipper::Types::Boolean.new(false)
     group = Flipper::Types::Group.new(:admins)
@@ -199,6 +201,8 @@ RSpec.describe Flipper::Feature do
     {
       user => actor,
       actor => actor,
+      domain => san,
+      san => san,
       true => boolean_true,
       false => boolean_false,
       boolean_true => boolean_true,
@@ -799,15 +803,17 @@ RSpec.describe Flipper::Feature do
 
     it 'can return disabled gates' do
       expect(subject.disabled_gates.map(&:name).to_set).to eq(Set[
-              :actor,
               :boolean,
+              :actor,
               :group,
+              :allowed_san,
             ])
 
       expect(subject.disabled_gate_names.to_set).to eq(Set[
-              :actor,
               :boolean,
+              :actor,
               :group,
+              :allowed_san,
             ])
     end
   end

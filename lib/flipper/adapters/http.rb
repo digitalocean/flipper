@@ -131,6 +131,8 @@ module Flipper
                  { flipper_id: value }
                when :percentage_of_actors, :percentage_of_time
                  { percentage: value }
+               when :allowed_sans
+                 { domain: value }
                else
                  raise "#{gate.key} is not a valid flipper gate key"
                end

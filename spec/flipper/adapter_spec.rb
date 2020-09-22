@@ -10,6 +10,7 @@ RSpec.describe Flipper::Adapter do
       actors: Set.new,
       percentage_of_actors: nil,
       percentage_of_time: nil,
+      allowed_sans: Set.new,
     }
   end
 

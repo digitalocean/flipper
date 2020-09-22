@@ -255,6 +255,62 @@
 		</div>
 	</div>
 
+	<div class="row">
+		<div class="col-md">
+			<div class="card">
+				<div class="card-header">
+					<div class="d-flex w-100 justify-content-between align-items-center">
+						<div>
+							<h4><%= Flipper::UI.configuration.allowed_sans.title %></h4>
+						</div>
+						<div>
+							<form action="<%= script_name %>/features/<%= @feature.key %>/allowed_sans" method="post" class="form-inline">
+								<%== csrf_input_tag %>
+								<input type="hidden" name="operation" value="enable">
+								<input type="text" name="value" placeholder="ie: *.edge.staff.digitalocean.com" class="form-control form-control-sm mr-sm-2 mb-2 mb-md-0">
+								<input type="submit" value="Add domain SAN" class="btn btn-light btn-sm">
+							</form>
+						</div>
+					</div>
+				</div>
+				<% allowed_sans_value = @feature.allowed_sans_value(source: "feature.erb") %>
+				<% if allowed_sans_value.empty? %>
+					<div class="card-body bg-light">
+						<div class="text-center">
+							<span class="mega-octicon octicon-person text-muted"></span>
+							<span class="mega-octicon octicon-squirrel text-muted"></span>
+							<span class="mega-octicon octicon-zap text-muted"></span>
+							<h4>No domain SANs</h4>
+							<p><%= Flipper::UI.configuration.allowed_sans.description %></p>
+						</div>
+					</div>
+				<% else %>
+					<ul class="list-group list-group-flush">
+						<% allowed_sans_value.each do |item| %>
+							<li class="list-group-item">
+								<div class="d-flex w-100 justify-content-between align-items-center">
+									<div>
+										<%= item %>
+									</div>
+									<div>
+										<form action="<%= script_name %>/features/<%= @feature.key %>/allowed_sans" method="post">
+											<%== csrf_input_tag %>
+											<input type="hidden" name="operation" value="disable">
+											<input type="hidden" name="value" value="<%= item %>">
+											<button type="submit" value="Disable" class="btn btn-link btn-sm text-danger" data-toggle="tooltip" title="Disable <%= item %>" data-placement="left">
+												<span class="octicon octicon-trashcan"></span>
+											</button>
+										</form>
+									</div>
+								</div>
+							</li>
+						<% end %>
+					</ul>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
 	<% if Flipper::UI.configuration.feature_removal_enabled %>
 		<div class="row">
 			<div class="col">
